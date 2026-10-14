@@ -23,4 +23,4 @@
 /* VietQR dạng vuông, có vùng trắng an toàn và khung vàng ngoài mã. */
 #gift-qr{width:min(100%,280px);height:auto;padding:8px;border:1px solid var(--gold);background:#fff;box-shadow:0 0 0 5px var(--paper),0 0 0 6px var(--line);margin:8px auto 18px}
 
-footer>.footer-promise{margin:0 auto 22px;line-height:1.8;letter-spacing:2px}
+footer>.footer-note{max-width:440px;margin-inline:auto;line-height:1.9}

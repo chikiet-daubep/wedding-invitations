@@ -129,4 +129,4 @@ Repo không chứa cơ sở dữ liệu phản hồi thật của khách, tệp 
 
 ## Giao diện hiện tại
 
-Section xác nhận tham dự đã được bỏ khỏi thiệp theo yêu cầu. Câu “MỘT LỜI HẸN, MỘT NIỀM VUI” được giữ ở footer. Các phần hướng dẫn RSVP ở trên mô tả tính năng trước đây; máy chủ và công cụ quản lý vẫn giữ dữ liệu phản hồi cũ, nhưng thiệp không còn biểu mẫu gửi RSVP hoặc nút Google Form.
+Section xác nhận tham dự đã được bỏ khỏi thiệp theo yêu cầu. Câu “Sự hiện diện của bạn là niềm vui của chúng mình. Hẹn gặp bạn trong ngày chung đôi ♡” được giữ ở footer. Các phần hướng dẫn RSVP ở trên mô tả tính năng trước đây; máy chủ và công cụ quản lý vẫn giữ dữ liệu phản hồi cũ, nhưng thiệp không còn biểu mẫu gửi RSVP hoặc nút Google Form.
