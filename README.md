@@ -2,17 +2,55 @@
 
 Thiệp HTML, CSS, JavaScript thuần, phong cách Trung Hoa với đỏ son, vàng champagne, đèn lồng và chữ song hỷ. Tiêu đề dùng **Lora**, nội dung dùng Be Vietnam Pro. Không cần npm hoặc bước build. Máy chủ local cho RSVP dùng Python 3.10 trở lên, không cần cài thêm thư viện.
 
+## Xuất bản lên GitHub Pages
+
+Cấu trúc dành cho triển khai:
+
+```text
+.github/workflows/pages.yml  # Tự triển khai khi public/ thay đổi trên main
+public/                     # Toàn bộ website tĩnh, không cần build
+  index.html
+  config.js                 # Tên khách, QR, URL biểu mẫu RSVP
+  guest-map.js
+  guests.html               # Công cụ tạo link, tải danh sách để commit
+  assets/                   # Ảnh, nhạc, video và lịch
+server.py                   # Chỉ dùng local để lưu RSVP
+start-local.cmd
+docs/                       # Ảnh xem trước, không đưa lên Pages
+```
+
+1. Trong repo, mở **Settings → Pages → Build and deployment → Source**, chọn **GitHub Actions**.
+2. Mở **Actions → Deploy wedding invitation to GitHub Pages → Run workflow**, chọn `main`. Những lần push thay đổi `public/` về sau sẽ tự triển khai.
+3. Đợi workflow hoàn thành. URL dự kiến: **https://chikiet-daubep.github.io/wedding-invitations/**. URL chính xác hiện trong kết quả deployment.
+4. Thử link cá nhân hóa: **https://chikiet-daubep.github.io/wedding-invitations/?guest=gia-dinh**.
+
+Workflow chỉ upload `public/`, dùng các action chính thức theo [hướng dẫn GitHub](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages). Đường dẫn tài nguyên là tương đối nên hoạt động dưới `/wedding-invitations/` và khi dùng tên miền riêng. `.nojekyll` giữ nguyên tệp tĩnh. Không cần npm, token thủ công hoặc tệp build.
+
+### RSVP trên GitHub Pages
+
+GitHub Pages không chạy Python hoặc SQLite. Bản online ẩn biểu mẫu local và sổ lời chúc để khách không bấm gửi vào API không tồn tại. Để nhận xác nhận online, tạo Google Form rồi điền URL HTTPS trong `public/config.js`:
+
+```js
+rsvpFormUrl: 'https://docs.google.com/forms/d/e/MA_FORM/viewform',
+```
+
+Khi có URL hợp lệ, phần tham dự hiện nút mở biểu mẫu. Google Form nhận phản hồi riêng; lời chúc không tự đồng bộ lên thiệp. Để trống thì phần này chỉ hiện lời hẹn gặp. Bản local chạy `start-local.cmd` vẫn giữ đầy đủ RSVP và sổ lời chúc SQLite như trước.
+
+### Cập nhật khách mời khi online
+
+Mở `/wedding-invitations/guests.html`, tạo danh sách, tải `guest-map.js`, thay `public/guest-map.js` và commit/push. Sau deployment, thử tên khách rồi mới gửi link. Công cụ trên Pages không ghi được vào repo. Có thể chỉnh trực tiếp `public/config.js` hoặc `public/guest-map.js`.
+
 ## Mở thiệp
 
 Để dùng **đầy đủ cả RSVP và sổ lời chúc**, chạy `start-local.cmd` rồi mở `http://127.0.0.1:4173/` bằng Chrome, Edge, Safari hoặc Firefox hiện đại. Giữ cửa sổ máy chủ mở trong lúc sử dụng; nhấn Ctrl+C để dừng. Nếu cần đổi cổng: `python server.py --port 4174`.
 
-Các tệp ảnh, nhạc và video đã đi kèm. Có thể mở `dist/index.html` trực tiếp để xem phần thiệp. Khi mở như vậy, hoặc khi chỉ đưa `dist/` lên hosting tĩnh, RSVP sẽ thông báo chưa kết nối và **không báo gửi thành công**. Muốn nhận RSVP từ khách bên ngoài, cần máy chủ được triển khai riêng; bản giao hiện tại chỉ chạy trên máy của bạn, không được xuất bản lên dịch vụ ngoài.
+Các tệp ảnh, nhạc và video đã đi kèm. Có thể mở `public/index.html` trực tiếp để xem phần thiệp. Khi mở như vậy hoặc đưa `public/` lên GitHub Pages, biểu mẫu RSVP local và sổ lời chúc được ẩn. Có thể đặt link Google Form trong `rsvpFormUrl` để khách xác nhận tham dự online. Muốn nhận RSVP từ khách bên ngoài, cần máy chủ được triển khai riêng; máy chủ Python đi kèm chỉ phục vụ bản local.
 
 Font Google và bản đồ cần Internet; khi mất kết nối, chữ dùng font dự phòng. Bản đồ không cần khóa API; có nút chỉ đường riêng nếu iframe không hiển thị.
 
 ## Cá nhân hóa người nhận qua URL
 
-Sửa `dist/config.js`, mục `guests`:
+Sửa `public/config.js`, mục `guests`:
 
 ```js
 guests: {
@@ -24,7 +62,7 @@ guests: {
 
 Gửi link dạng `https://ten-mien-cua-ban/?guest=anh-minh`. Alias `?to=anh-minh` cũng được hỗ trợ. Mã không có trong danh sách hiển thị `Quý khách`. Mã được chuyển thành chữ thường; nên dùng chữ không dấu và dấu gạch nối. Tên khách được chèn bằng `textContent`, không xử lý như HTML.
 
-Hoặc mở `http://127.0.0.1:4173/guests.html` để dùng **công cụ tạo link khách mời**. Mỗi dòng nhập một tên, hoặc `ma-khach | Tên đầy đủ`. Bấm **Tạo & lưu danh sách**: bản local ghi thật vào `dist/guest-map.js` và `dist/guest-map.json`; link mới lập tức hiện đúng tên. Danh sách này ưu tiên hơn `config.js` nếu trùng mã. Khi dùng hosting tĩnh, tải `guest-map.js` rồi thay vào cùng thư mục với `index.html`.
+Hoặc mở `http://127.0.0.1:4173/guests.html` để dùng **công cụ tạo link khách mời**. Mỗi dòng nhập một tên, hoặc `ma-khach | Tên đầy đủ`. Bấm **Tạo & lưu danh sách**: bản local ghi thật vào `public/guest-map.js` và `public/guest-map.json`; link mới lập tức hiện đúng tên. Danh sách này ưu tiên hơn `config.js` nếu trùng mã. Khi dùng hosting tĩnh, tải `guest-map.js` rồi thay vào cùng thư mục với `index.html`.
 
 Các link bắt đầu bằng `127.0.0.1` chỉ dùng xem trên máy đang chạy thiệp. Khi có hosting thật, đổi ô **Đường dẫn gốc của thiệp** thành URL hosting trước khi sao chép link gửi khách.
 
@@ -32,7 +70,7 @@ Nếu mở trực tiếp trên máy, thêm `?guest=gia-dinh` vào cuối URL c�
 
 ## Thay QR mừng cưới
 
-QR hiện tại là hình mẫu, **không chứa dữ liệu nhận chuyển khoản**. Chép ảnh QR thật vào `dist/assets/qr-ngan-hang.png`, sau đó sửa:
+QR hiện tại là hình mẫu, **không chứa dữ liệu nhận chuyển khoản**. Chép ảnh QR thật vào `public/assets/qr-ngan-hang.png`, sau đó sửa:
 
 ```js
 gift: {
@@ -48,7 +86,7 @@ Khi `isMock: true`, thiệp ghi rõ “QR mẫu · Chưa dùng để chuyển kh
 
 ## Ảnh, video và nhạc
 
-- Chín ảnh cưới gốc nằm trong `dist/assets/photo-01.jpg` đến `photo-09.jpg`, theo thứ tự tên tệp nguồn tăng dần; mọi ảnh đều có trong album.
+- Chín ảnh cưới gốc nằm trong `public/assets/photo-01.jpg` đến `photo-09.jpg`, theo thứ tự tên tệp nguồn tăng dần; mọi ảnh đều có trong album.
 - Nhạc nền dùng đúng `Violin.mp3` bạn cung cấp, bắt đầu sau thao tác mở thiệp. Nút nhạc ở góc dưới cho phép bật/tắt.
 - Video slideshow đã được tối ưu từ tệp 4K xuống 720p để tải qua mạng thuận tiện hơn. Video chỉ tải khi người xem bấm phát; có nút điều khiển và hỗ trợ toàn màn hình của trình duyệt.
 - Khi video phát, nhạc nền tạm dừng; khi video dừng/kết thúc, nhạc tiếp tục nếu người xem vẫn bật nhạc.
@@ -82,9 +120,9 @@ Máy chủ đi kèm là máy chủ xem thử local, không phải cấu hình tr
 
 ## Các tệp trong repo
 
-- `dist/`: toàn bộ HTML, CSS, JavaScript và tài nguyên để chạy thiệp.
-- `dist/assets/`: chín ảnh cưới, Violin MP3, slideshow MP4 đã tối ưu, QR mẫu, biểu tượng, ảnh bìa video và lịch ICS.
+- `public/`: toàn bộ HTML, CSS, JavaScript và tài nguyên để chạy thiệp.
+- `public/assets/`: chín ảnh cưới, Violin MP3, slideshow MP4 đã tối ưu, QR mẫu, biểu tượng, ảnh bìa video và lịch ICS.
 - `server.py`, `start-local.cmd`: máy chủ và tệp khởi chạy local có lưu RSVP.
 - `docs/`: hình xem trước bìa và giao diện mobile.
 
-Repo không chứa cơ sở dữ liệu phản hồi thật của khách, tệp kiểm thử, thông tin đăng nhập hoặc mã định danh của dịch vụ hosting. Upload mã nguồn lên GitHub không tự triển khai trang web hay máy chủ RSVP.
+Repo không chứa cơ sở dữ liệu phản hồi thật của khách, tệp kiểm thử, thông tin đăng nhập hoặc mã định danh của dịch vụ hosting. Workflow GitHub Pages chỉ xuất bản thư mục public/, không xuất bản máy chủ Python hoặc dữ liệu RSVP.

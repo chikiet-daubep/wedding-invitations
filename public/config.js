@@ -3,6 +3,8 @@
  * Mã khách không có trong GUESTS sẽ hiển thị lời mời chung.
  */
 window.WEDDING_CONFIG = {
+  // GitHub Pages: điền URL Google Form để nhận RSVP, hoặc để trống.
+  rsvpFormUrl: '',
   receptionAt: '2026-11-25T18:00:00+07:00',
   guests: {
     'gia-dinh': 'Quý gia đình',

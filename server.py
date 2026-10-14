@@ -16,7 +16,7 @@ from urllib.parse import unquote, urlsplit
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--port', type=int, default=4173)
-parser.add_argument('--root', type=Path, default=Path(__file__).parent / 'dist')
+parser.add_argument('--root', type=Path, default=Path(__file__).parent / 'public')
 parser.add_argument('--data-dir', type=Path, default=Path(__file__).parent / 'data')
 args = parser.parse_args()
 ROOT = args.root.resolve()

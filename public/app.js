@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const config = window.WEDDING_CONFIG;
+  const hasLocalApi = ['127.0.0.1', 'localhost'].includes(location.hostname) && ['http:', 'https:'].includes(location.protocol);
   const $ = (selector) => document.querySelector(selector);
   const gate = $('#gate');
   const main = $('#invitation');
@@ -311,6 +312,7 @@
   }
   async function initializeRsvp() {
     rsvpInitialized = true;
+    if (!hasLocalApi) return;
     if (!['http:', 'https:'].includes(location.protocol)) {
       setRsvpStatus('Bạn đang xem bản tĩnh. Mở thiệp bằng start-local.cmd để gửi xác nhận và lời chúc.', 'error');
       return;
@@ -364,4 +366,28 @@
     }
   });
   $('#rsvp-name').addEventListener('input', () => $('#rsvp-name').setCustomValidity(''));
+  if (!hasLocalApi) {
+    rsvpForm.hidden = true;
+    rsvpForm.style.display = 'none';
+    $('.wishes-section').hidden = true;
+    $('.wishes-section').style.display = 'none';
+    const note = document.createElement('div');
+    note.className = 'rsvp-form';
+    const text = document.createElement('p');
+    text.textContent = 'Sự hiện diện của bạn là niềm vui của chúng mình. Hẹn gặp bạn trong ngày chung đôi ♡';
+    note.append(text);
+    try {
+      const url = new URL(config.rsvpFormUrl);
+      if (url.protocol === 'https:') {
+        const link = document.createElement('a');
+        link.className = 'button button-wine';
+        link.href = url.href;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.textContent = 'Xác nhận tham dự & gửi lời chúc ↗';
+        note.append(link);
+      }
+    } catch {}
+    rsvpForm.after(note);
+  }
 })();

@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const $ = selector => document.querySelector(selector);
+  const hasLocalApi = ['127.0.0.1', 'localhost'].includes(location.hostname) && ['http:', 'https:'].includes(location.protocol);
   let guests = { ...window.WEDDING_CONFIG.guests, ...(window.WEDDING_GUESTS || {}) };
   const status = $('#guest-tool-status');
   const baseInput = $('#base-url');
@@ -56,6 +57,10 @@
       }
       guests = next;
       render();
+      if (!hasLocalApi) {
+        message('Đã tạo link. Tải guest-map.js, thay public/guest-map.js trong repo rồi push để cập nhật tên khách.');
+        return;
+      }
       $('#generate-guests').disabled = true;
       message('Đang lưu danh sách…');
       try {
@@ -80,6 +85,11 @@
     message('Đã tạo tệp guest-map.js. Giữ nguyên tên tệp khi thay vào thiệp.');
   });
   async function loadResponses() {
+    if (!hasLocalApi) {
+      $('#responses-title').closest('section').hidden = true;
+      $('#generate-guests').textContent = 'Tạo danh sách & link';
+      return;
+    }
     try {
       const response = await fetch('/api/rsvps', { cache: 'no-store', signal: AbortSignal.timeout(7000) });
       if (!response.ok) throw new Error();
