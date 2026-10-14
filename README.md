@@ -126,3 +126,7 @@ Máy chủ đi kèm là máy chủ xem thử local, không phải cấu hình tr
 - `docs/`: hình xem trước bìa và giao diện mobile.
 
 Repo không chứa cơ sở dữ liệu phản hồi thật của khách, tệp kiểm thử, thông tin đăng nhập hoặc mã định danh của dịch vụ hosting. Workflow GitHub Pages chỉ xuất bản thư mục public/, không xuất bản máy chủ Python hoặc dữ liệu RSVP.
+
+## Giao diện hiện tại
+
+Section xác nhận tham dự đã được bỏ khỏi thiệp theo yêu cầu. Câu “MỘT LỜI HẸN, MỘT NIỀM VUI” được giữ ở footer. Các phần hướng dẫn RSVP ở trên mô tả tính năng trước đây; máy chủ và công cụ quản lý vẫn giữ dữ liệu phản hồi cũ, nhưng thiệp không còn biểu mẫu gửi RSVP hoặc nút Google Form.

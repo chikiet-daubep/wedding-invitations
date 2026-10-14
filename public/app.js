@@ -115,7 +115,7 @@
       if (!revealObserver) enableReveals();
       const map = $('#venue-map');
       if (!map.src) map.src = map.dataset.src;
-      if (!rsvpInitialized) initializeRsvp();
+      if (hasLocalApi) loadWishes();
     }, reducedMotion ? 30 : 1700);
   });
 
@@ -245,33 +245,7 @@
     }, { passive: true });
   }
 
-  // RSVP lưu thật qua máy chủ local đi kèm. Không giả báo thành công trên hosting tĩnh.
-  let rsvpInitialized = false;
-  let rsvpAvailable = false;
-  let rsvpBusy = false;
-  const rsvpForm = $('#rsvp-form');
-  const rsvpStatus = $('#rsvp-status');
-  const rsvpStorageKey = `wedding-rsvp-${guestCode || 'general'}`;
-  let remembered = {};
-  try { remembered = JSON.parse(localStorage.getItem(rsvpStorageKey) || '{}') || {}; } catch {}
-  if (typeof remembered.name === 'string') $('#rsvp-name').value = remembered.name;
-  else if (guestName !== config.defaultGuest) $('#rsvp-name').value = guestName;
-  if (typeof remembered.wish === 'string') $('#rsvp-wish').value = remembered.wish;
-  if (['yes', 'maybe', 'no'].includes(remembered.attendance)) rsvpForm.querySelector(`input[value="${remembered.attendance}"]`).checked = true;
-  if (Number.isInteger(remembered.partySize) && remembered.partySize > 0) $('#rsvp-party').value = String(remembered.partySize);
-  $('#publish-wish').checked = remembered.publish === true;
-
-  function setRsvpStatus(message, state = '') {
-    rsvpStatus.textContent = message;
-    rsvpStatus.className = `form-status ${state}`;
-  }
-  function updatePartySize() {
-    const attending = rsvpForm.querySelector('input[name="attendance"]:checked')?.value;
-    $('#rsvp-party').disabled = attending !== 'yes';
-  }
-  rsvpForm.querySelectorAll('input[name="attendance"]').forEach(input => input.addEventListener('change', updatePartySize));
-  updatePartySize();
-
+  // Sổ lời chúc vẫn đọc dữ liệu đã có trong bản local.
   async function api(path, options = {}) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 7000);
@@ -310,84 +284,8 @@
     try { renderWishes((await api('/api/wishes')).items); }
     catch { $('#wish-wall').textContent = 'Sổ lời chúc tạm thời chưa tải được. Bạn có thể thử lại sau.'; }
   }
-  async function initializeRsvp() {
-    rsvpInitialized = true;
-    if (!hasLocalApi) return;
-    if (!['http:', 'https:'].includes(location.protocol)) {
-      setRsvpStatus('Bạn đang xem bản tĩnh. Mở thiệp bằng start-local.cmd để gửi xác nhận và lời chúc.', 'error');
-      return;
-    }
-    try {
-      const health = await api('/api/status');
-      rsvpAvailable = health.ok === true;
-      if (rsvpAvailable) await loadWishes();
-    } catch {
-      setRsvpStatus('Chức năng gửi hiện chưa kết nối. Vui lòng mở bản thiệp chạy bằng start-local.cmd.', 'error');
-    }
-  }
-  rsvpForm.addEventListener('submit', async event => {
-    event.preventDefault();
-    if (rsvpBusy) return;
-    if (!rsvpAvailable) {
-      rsvpInitialized = false;
-      await initializeRsvp();
-      if (!rsvpAvailable) return;
-    }
-    const attendance = rsvpForm.querySelector('input[name="attendance"]:checked')?.value;
-    const payload = {
-      clientId: typeof remembered.clientId === 'string' ? remembered.clientId : crypto.randomUUID(),
-      guestCode,
-      name: $('#rsvp-name').value.trim(),
-      attendance,
-      partySize: attendance === 'yes' ? Number($('#rsvp-party').value) : 0,
-      wish: $('#rsvp-wish').value.trim(),
-      publish: $('#publish-wish').checked,
-    };
-    if (!payload.name) { $('#rsvp-name').setCustomValidity('Bạn vui lòng nhập tên.'); rsvpForm.reportValidity(); return; }
-    $('#rsvp-name').setCustomValidity('');
-    // Giữ cùng mã khi gửi lại sau mất kết nối, tránh tạo phản hồi trùng.
-    remembered.clientId = payload.clientId;
-    try { localStorage.setItem(rsvpStorageKey, JSON.stringify(remembered)); } catch {}
-    rsvpBusy = true;
-    $('#rsvp-submit').disabled = true;
-    setRsvpStatus('Đang gửi lời hẹn của bạn…');
-    try {
-      await api('/api/rsvp', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
-      remembered = payload;
-      try { localStorage.setItem(rsvpStorageKey, JSON.stringify(payload)); } catch {}
-      setRsvpStatus(attendance === 'yes' ? 'Đã nhận lời hẹn. Hẹn gặp bạn trong ngày vui của chúng mình ♡' : 'Đã nhận phản hồi và lời chúc. Chúng mình cảm ơn bạn ♡', 'success');
-      $('#rsvp-submit').firstChild.textContent = 'Cập nhật lời hẹn ';
-      await loadWishes();
-    } catch (error) {
-      setRsvpStatus(error.name === 'AbortError' ? 'Chưa nhận được phản hồi. Bạn có thể bấm gửi lại để kiểm tra.' : error.message || 'Chưa gửi được. Vui lòng thử lại.', 'error');
-    } finally {
-      rsvpBusy = false;
-      $('#rsvp-submit').disabled = false;
-    }
-  });
-  $('#rsvp-name').addEventListener('input', () => $('#rsvp-name').setCustomValidity(''));
   if (!hasLocalApi) {
-    rsvpForm.hidden = true;
-    rsvpForm.style.display = 'none';
     $('.wishes-section').hidden = true;
     $('.wishes-section').style.display = 'none';
-    const note = document.createElement('div');
-    note.className = 'rsvp-form';
-    const text = document.createElement('p');
-    text.textContent = 'Sự hiện diện của bạn là niềm vui của chúng mình. Hẹn gặp bạn trong ngày chung đôi ♡';
-    note.append(text);
-    try {
-      const url = new URL(config.rsvpFormUrl);
-      if (url.protocol === 'https:') {
-        const link = document.createElement('a');
-        link.className = 'button button-wine';
-        link.href = url.href;
-        link.target = '_blank';
-        link.rel = 'noopener';
-        link.textContent = 'Xác nhận tham dự & gửi lời chúc ↗';
-        note.append(link);
-      }
-    } catch {}
-    rsvpForm.after(note);
   }
 })();
