@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Chi Kiet To Quan//Wedding Invitation//VI
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:chi-kiet-to-quan-20261125@wedding.local
+DTSTAMP:20261014T000000Z
+DTSTART:20261125T110000Z
+DTEND:20261125T140000Z
+SUMMARY:Tiệc cưới Chí Kiệt & Tố Quân
+LOCATION:Diamond Place II\, 584 Âu Cơ\, Phường Bảy Hiền
+DESCRIPTION:Sảnh Grand Diamond - Tầng Trệt. Trân trọng kính mời!
+END:VEVENT
+END:VCALENDAR
