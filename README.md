@@ -70,7 +70,7 @@ Nếu mở trực tiếp trên máy, thêm `?guest=gia-dinh` vào cuối URL c�
 
 ## Thay QR mừng cưới
 
-QR hiện tại là hình mẫu, **không chứa dữ liệu nhận chuyển khoản**. Chép ảnh QR thật vào `public/assets/qr-ngan-hang.png`, sau đó sửa:
+QR hiện tại dùng ảnh TPBank do gia đình cung cấp tại `public/assets/qr-ngan-hang.jpg`; chủ tài khoản GIANG CHI KIET, số tài khoản 00000272054. Chép ảnh QR thật vào `public/assets/qr-ngan-hang.png`, sau đó sửa:
 
 ```js
 gift: {
@@ -121,7 +121,7 @@ Máy chủ đi kèm là máy chủ xem thử local, không phải cấu hình tr
 ## Các tệp trong repo
 
 - `public/`: toàn bộ HTML, CSS, JavaScript và tài nguyên để chạy thiệp.
-- `public/assets/`: chín ảnh cưới, Violin MP3, slideshow MP4 đã tối ưu, QR mẫu, biểu tượng, ảnh bìa video và lịch ICS.
+- `public/assets/`: chín ảnh cưới, Violin MP3, slideshow MP4 đã tối ưu, QR TPBank, biểu tượng, ảnh bìa video và lịch ICS.
 - `server.py`, `start-local.cmd`: máy chủ và tệp khởi chạy local có lưu RSVP.
 - `docs/`: hình xem trước bìa và giao diện mobile.
 

@@ -9,3 +9,13 @@
 @media(max-width:540px){.hero-photo{height:520px}.hero-copy{padding:47px 22px 58px}.cover-copy h1{font-size:30px}.lantern{width:36px}.lantern:before{height:26px}.lantern>span{height:46px;font-size:20px}.lantern>span:before,.lantern>span:after{left:8px;right:8px}.lantern>i{height:22px}.lantern-left{left:9%}.lantern-right{right:9%}.royal-seal{width:36px;height:36px;bottom:53px;right:-13px;font-size:19px;outline-width:3px}.cover-copy h1{flex-wrap:nowrap;gap:7px;font-size:clamp(25px,7.5vw,31px)}.site-header{padding:0 15px}.site-header nav{gap:12px}.site-header nav a{font-size:8px}.brand{font-size:21px;gap:6px}.brand span{font-size:15px}.rsvp-intro h2{font-size:30px}.rsvp-form{padding:20px 17px}.rsvp-form>label,.rsvp-form legend{font-size:11px}.wish-wall{grid-template-columns:1fr}.wish-card{padding:22px}.wishes-empty{font-size:15px}.tool-shell{padding-inline:20px}.tool-controls>.button{width:100%}.guest-table th,.guest-table td{padding:11px 7px;font-size:10px}.guest-table th:nth-child(2){min-width:95px}.tool-header{gap:10px}.tool-title h1{font-size:25px}}
 @media(max-height:690px) and (max-width:540px){.hero-photo{height:460px}.lantern>span{height:40px}.lantern-left{left:8%}.lantern-right{right:8%}}
 @media(prefers-reduced-motion:reduce){.hero-photo>img{will-change:auto;translate:none;transform:scale(1.06)}.gold-dust{display:none}.is-open .hero-copy{opacity:1;translate:none}}
+
+/* Hai gia đình dùng cùng các hàng để tên và địa chỉ luôn ngang nhau. */
+.family-grid{grid-template-rows:repeat(6,auto);align-items:start}
+.family-grid>.family{display:grid;grid-template-rows:subgrid;grid-row:1 / span 6;min-width:0;align-self:stretch}
+.family-grid>.family:first-child{grid-column:1}
+.family-grid>.family:last-child{grid-column:3}
+.family-happiness{grid-column:2;grid-row:1 / span 6;align-self:center}
+.family-address br{display:block}
+.family-address{width:100%;max-width:none}
+#gift-qr{width:min(100%,320px);height:auto;object-fit:contain;padding:0;border:0}

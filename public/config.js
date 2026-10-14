@@ -15,10 +15,10 @@ window.WEDDING_CONFIG = {
   music: 'assets/violin.mp3',
   video: 'assets/wedding-film.mp4',
   gift: {
-    qrImage: 'assets/qr-mock.svg', // Thay bằng ảnh QR của bạn.
-    isMock: true,                // Đổi thành false sau khi thay QR thật.
-    bank: '',
-    accountNumber: '',
-    accountName: '',
+    qrImage: 'assets/qr-ngan-hang.jpg',
+    isMock: false,
+    bank: 'TPBank',
+    accountNumber: '00000272054',
+    accountName: 'GIANG CHI KIET',
   },
 };
