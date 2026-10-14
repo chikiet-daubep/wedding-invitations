@@ -11,6 +11,27 @@
   const video = $('#wedding-video');
   const toggle = $('#music-toggle');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Cánh hoa đào rơi nhẹ, không chặn thao tác và giảm số cánh trên điện thoại.
+  const snow = document.createElement('div');
+  snow.className = 'petal-fall';
+  snow.setAttribute('aria-hidden', 'true');
+  const flakes = document.createDocumentFragment();
+  for (let i = 0; i < 32; i++) {
+    const flake = document.createElement('span');
+    flake.className = 'peach-petal';
+    flake.style.setProperty('--snow-x', `${Math.random() * 100}%`);
+    flake.style.setProperty('--snow-size', `${8 + Math.random() * 7}px`);
+    flake.style.setProperty('--snow-duration', `${16 + Math.random() * 14}s`);
+    flake.style.setProperty('--snow-delay', `${-Math.random() * 26}s`);
+    flake.style.setProperty('--snow-drift', `${-65 + Math.random() * 130}px`);
+    flake.style.setProperty('--snow-opacity', `${0.5 + Math.random() * 0.3}`);
+    flakes.append(flake);
+  }
+  snow.append(flakes);
+  document.body.append(snow);
+  document.addEventListener('visibilitychange', () => {
+    snow.classList.toggle('snow-paused', document.hidden);
+  });
   let opened = false;
   let musicWanted = false;
   let playAttempt = 0;

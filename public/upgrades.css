@@ -24,3 +24,13 @@
 #gift-qr{width:min(100%,280px);height:auto;padding:8px;border:1px solid var(--gold);background:#fff;box-shadow:0 0 0 5px var(--paper),0 0 0 6px var(--line);margin:8px auto 18px}
 
 footer>.footer-note{max-width:440px;margin-inline:auto;line-height:1.9}
+
+/* Cánh hoa đào hồng đất, nhìn rõ trên nền kem lẫn nền đỏ. */
+.petal-fall{display:none;position:fixed;inset:0;z-index:110;overflow:hidden;pointer-events:none;user-select:none}
+.is-open .petal-fall{display:block}
+.peach-petal{position:absolute;top:-20px;left:var(--snow-x);width:var(--snow-size);height:calc(var(--snow-size) * 1.35);border-radius:85% 15% 75% 25%;background:linear-gradient(135deg,#f3b9bc 5%,#d88594 65%,#bb637b);opacity:var(--snow-opacity);box-shadow:inset 1px 1px 2px #ffe1dc99,0 1px 2px #73304018;animation:petalFall var(--snow-duration) var(--snow-delay) linear infinite;will-change:transform}
+.peach-petal:nth-child(3n){border-radius:20% 80% 25% 75%;background:linear-gradient(135deg,#f4c4bd,#cb8190)}
+@keyframes petalFall{0%{transform:translate3d(0,-20px,0) rotate(0deg) rotateY(0deg)}25%{transform:translate3d(calc(var(--snow-drift) * .5),25vh,0) rotate(80deg) rotateY(45deg)}50%{transform:translate3d(var(--snow-drift),50vh,0) rotate(165deg) rotateY(0deg)}75%{transform:translate3d(calc(var(--snow-drift) * .5),75vh,0) rotate(245deg) rotateY(-45deg)}100%{transform:translate3d(0,calc(100vh + 30px),0) rotate(330deg) rotateY(0deg)}}
+.snow-paused .peach-petal{animation-play-state:paused}
+@media(max-width:540px){.peach-petal:nth-child(n+19){display:none}}
+@media(prefers-reduced-motion:reduce){.is-open .petal-fall{display:none}.peach-petal{animation:none}}
