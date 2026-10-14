@@ -15,7 +15,7 @@ window.WEDDING_CONFIG = {
   music: 'assets/violin.mp3',
   video: 'assets/wedding-film.mp4',
   gift: {
-    qrImage: 'assets/qr-ngan-hang.jpg',
+    qrImage: 'assets/qr-mung-cuoi.svg',
     isMock: false,
     bank: 'TPBank',
     accountNumber: '00000272054',
