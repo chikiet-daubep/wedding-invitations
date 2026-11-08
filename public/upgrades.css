@@ -24,6 +24,8 @@
 #gift-qr{width:min(100%,280px);height:auto;padding:8px;border:1px solid var(--gold);background:#fff;box-shadow:0 0 0 5px var(--paper),0 0 0 6px var(--line);margin:8px auto 18px}
 
 footer>.footer-note{max-width:440px;margin-inline:auto;line-height:1.9}
+.header-actions{display:flex;align-items:center;gap:16px}.language-toggle{min-width:38px;height:30px;padding:0 9px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--wine);font-size:9px;font-weight:600;letter-spacing:1px;transition:background .2s,color .2s,transform .2s}.language-toggle:hover{background:var(--wine);color:var(--paper);transform:translateY(-1px)}.gate-language{margin:18px auto 0;border-color:#e8cc9580;color:var(--gold)}.gate-language:hover{background:var(--gold);color:var(--deep)}
+html[lang="en"] .cover-copy,.site-header{letter-spacing:.01em}
 
 /* Cánh hoa đào hồng đất, nhìn rõ trên nền kem lẫn nền đỏ. */
 .petal-fall{display:none;position:fixed;inset:0;z-index:110;overflow:hidden;pointer-events:none;user-select:none}

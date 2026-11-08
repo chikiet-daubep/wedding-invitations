@@ -42,6 +42,10 @@ Mở `/wedding-invitations/guests.html`, tạo danh sách, tải `guest-map.js`,
 
 ## Mở thiệp
 
+### Chuyển ngôn ngữ
+
+Thiệp hỗ trợ tiếng Việt và English. Nút **EN/VI** nằm trên bìa và thanh đầu trang; mặc định là tiếng Việt. Lựa chọn của khách được lưu trong trình duyệt để lần mở sau giữ nguyên ngôn ngữ. Tên khách, tên riêng, địa chỉ và tên địa điểm được giữ nguyên; các lời mời, tiêu đề, nút thao tác, đếm ngược và nội dung hướng dẫn được dịch theo ngôn ngữ đang chọn.
+
 Để dùng **đầy đủ cả RSVP và sổ lời chúc**, chạy `start-local.cmd` rồi mở `http://127.0.0.1:4173/` bằng Chrome, Edge, Safari hoặc Firefox hiện đại. Giữ cửa sổ máy chủ mở trong lúc sử dụng; nhấn Ctrl+C để dừng. Nếu cần đổi cổng: `python server.py --port 4174`.
 
 Các tệp ảnh, nhạc và video đã đi kèm. Có thể mở `public/index.html` trực tiếp để xem phần thiệp. Khi mở như vậy hoặc đưa `public/` lên GitHub Pages, biểu mẫu RSVP local và sổ lời chúc được ẩn. Có thể đặt link Google Form trong `rsvpFormUrl` để khách xác nhận tham dự online. Muốn nhận RSVP từ khách bên ngoài, cần máy chủ được triển khai riêng; máy chủ Python đi kèm chỉ phục vụ bản local.
