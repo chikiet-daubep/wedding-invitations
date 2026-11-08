@@ -1,2 +1,8 @@
 // Danh sách do công cụ guests.html tạo. Ưu tiên danh sách này rồi tới config.js.
-window.WEDDING_GUESTS = {};
+window.WEDDING_GUESTS = {
+  'vo-chong-minh-van': 'Vợ chồng Minh Văn',
+  'vo-chong-jason-tk': 'Vợ chồng Jason Tk',
+  'ban-sam-set': 'Bạn Sấm Sét',
+  'ban-tu-cam': 'Bạn Tú Cầm',
+  'vo-chong-thanh': 'Vợ chồng Thành',
+};
