@@ -14,11 +14,4 @@ window.WEDDING_CONFIG = {
   defaultGuest: 'Quý khách',
   music: 'assets/violin.mp3',
   video: 'assets/wedding-film.mp4',
-  gift: {
-    qrImage: 'assets/qr-mung-cuoi.svg',
-    isMock: false,
-    bank: 'TPBank',
-    accountNumber: '00000272054',
-    accountName: 'GIANG CHI KIET',
-  },
 };

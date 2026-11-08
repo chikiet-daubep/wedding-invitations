@@ -91,6 +91,7 @@
             <use href="#arrow" />
           </svg></button>
         <p class="cover-note">Mở một lời mời, chung một niềm vui.</p>
+        <button class="language-toggle gate-language" type="button" data-lang-toggle aria-label="Switch to English">EN</button>
       </div>
     </div>
     <noscript>
@@ -116,7 +117,7 @@
       <a class="brand" href="#home" aria-label="Chí Kiệt và Tố Quân, đầu thiệp">K<span>囍</span>Q</a>
       <nav aria-label="Nội dung thiệp"><a href="#ceremony">Hôn lễ</a><a href="#celebration">Tiệc cưới</a><a
           href="#memories">Album</a><a href="#film">Video</a></nav>
-      <span class="header-date">25.11.2026</span>
+      <div class="header-actions"><span class="header-date">25.11.2026</span><button class="language-toggle" type="button" data-lang-toggle aria-label="Switch to English">EN</button></div>
     </header>
 
     <section class="hero" id="home">
@@ -291,8 +292,7 @@
       <div class="gift-copy reveal"><span class="section-number">GỬI CHÚT YÊU THƯƠNG</span>
         <h2 id="gift-title">Mừng hạnh phúc <em>chúng mình.</em></h2>
         <p>Sự hiện diện của bạn là món quà quý giá nhất.<br>Nếu muốn gửi thêm lời chúc qua một món quà nhỏ,<br>chúng
-          mình xin đón nhận bằng tất cả lòng biết ơn.</p><button class="button button-outline" id="show-gift"
-          aria-haspopup="dialog">Gửi quà mừng cưới <span aria-hidden="true">♡</span></button>
+          mình xin đón nhận bằng tất cả lòng biết ơn.</p>
       </div><span class="gift-symbol" aria-hidden="true">囍</span>
     </section>
     <section class="section wishes-section" aria-labelledby="wishes-title">
@@ -318,9 +318,7 @@
         <use href="#calendar" />
       </svg><span>Tiệc cưới</span></a><a href="#location"><svg>
         <use href="#pin" />
-      </svg><span>Bản đồ</span></a><button id="dock-gift" aria-haspopup="dialog"><svg>
-        <use href="#gift-icon" />
-      </svg><span>Mừng cưới</span></button></nav>
+      </svg><span>Bản đồ</span></a></nav>
 
   <button class="music-button" id="music-toggle" hidden aria-label="Bật nhạc nền" aria-pressed="false"><span
       class="music-bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span id="music-label">Bật
@@ -334,19 +332,6 @@
     <figure><img id="lightbox-image" src="assets/photo-01.jpg" alt="">
       <figcaption id="photo-caption"></figcaption>
     </figure><button class="photo-next" id="photo-next" aria-label="Ảnh tiếp theo">→</button>
-  </dialog>
-  <dialog id="gift-dialog" class="gift-dialog" aria-labelledby="gift-dialog-title"><button class="dialog-close"
-      data-close="gift-dialog" aria-label="Đóng quà mừng cưới">×</button><span class="double-happiness"
-      aria-hidden="true">囍</span>
-    <p class="eyebrow">CẢM ƠN TẤM LÒNG CỦA BẠN</p>
-    <h2 id="gift-dialog-title">Hộp quà <em>mừng cưới</em></h2><img id="gift-qr" src="assets/qr-mung-cuoi.svg"
-      alt="Mã QR TPBank nhận quà mừng cưới của Giang Chí Kiệt">
-    <p id="gift-mock-note" class="mock-note">QR mẫu · Chưa dùng để chuyển khoản</p>
-    <div id="bank-details" hidden>
-      <p id="bank-name"></p><strong id="bank-account"></strong>
-      <p id="bank-owner"></p><button id="copy-account" class="button button-wine">Sao chép số tài khoản</button>
-    </div>
-    <p class="gift-thanks">Chí Kiệt & Tố Quân trân trọng cảm ơn ♡</p>
   </dialog>
 </body>
 
