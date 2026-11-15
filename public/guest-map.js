@@ -5,4 +5,6 @@ window.WEDDING_GUESTS = {
   'ban-sam-set': 'Bạn Sấm Sét',
   'ban-tu-cam': 'Bạn Tú Cầm',
   'vo-chong-thanh': 'Vợ chồng Thành',
+  'do-minh-hung': 'Đỗ Minh Hùng',
+  'boss-steven-xa': 'Boss-Steven Xa',
 };

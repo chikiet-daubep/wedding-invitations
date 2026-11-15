@@ -66,6 +66,15 @@ guests: {
 
 Gửi link dạng `https://ten-mien-cua-ban/?guest=anh-minh`. Alias `?to=anh-minh` cũng được hỗ trợ. Mã không có trong danh sách hiển thị `Quý khách`. Mã được chuyển thành chữ thường; nên dùng chữ không dấu và dấu gạch nối. Tên khách được chèn bằng `textContent`, không xử lý như HTML.
 
+Loại thiệp hiển thị ở bìa được cấu hình tại `invitationType` trong `public/config.js` (hiện tại là **Tiệc Báo Hỷ**):
+
+```js
+invitationType: {
+  vi: 'TIỆC BÁO HỶ',
+  en: 'CELEBRATION RECEPTION',
+},
+```
+
 Hoặc mở `http://127.0.0.1:4173/guests.html` để dùng **công cụ tạo link khách mời**. Mỗi dòng nhập một tên, hoặc `ma-khach | Tên đầy đủ`. Bấm **Tạo & lưu danh sách**: bản local ghi thật vào `public/guest-map.js` và `public/guest-map.json`; link mới lập tức hiện đúng tên. Danh sách này ưu tiên hơn `config.js` nếu trùng mã. Khi dùng hosting tĩnh, tải `guest-map.js` rồi thay vào cùng thư mục với `index.html`.
 
 Các link bắt đầu bằng `127.0.0.1` chỉ dùng xem trên máy đang chạy thiệp. Khi có hosting thật, đổi ô **Đường dẫn gốc của thiệp** thành URL hosting trước khi sao chép link gửi khách.

@@ -6,6 +6,10 @@ window.WEDDING_CONFIG = {
   // GitHub Pages: điền URL Google Form để nhận RSVP, hoặc để trống.
   rsvpFormUrl: '',
   receptionAt: '2026-11-25T18:00:00+07:00',
+  invitationType: {
+    vi: 'TIỆC BÁO HỶ',
+    en: 'CELEBRATION RECEPTION',
+  },
   guests: {
     'gia-dinh': 'Quý gia đình',
     'ban-be': 'Bạn và người thương',

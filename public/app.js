@@ -39,9 +39,9 @@
   let currentLanguage = localStorage.getItem('wedding-language') === 'en' ? 'en' : 'vi';
 
   const translations = [
-    ['.cover-copy .eyebrow', { vi: 'THIỆP MỜI THÀNH HÔN', en: 'WEDDING INVITATION' }],
+    ['.cover-copy .eyebrow', { vi: config.invitationType?.vi || 'TIỆC BÁO HỶ', en: config.invitationType?.en || 'CELEBRATION RECEPTION' }],
     ['.guest-line>span', { vi: 'TRÂN TRỌNG KÍNH MỜI', en: 'YOU ARE CORDIALLY INVITED' }],
-    ['#open-invitation', { vi: 'Mở thiệp mời <svg><use href="#arrow"/></svg>', en: 'Open invitation <svg><use href="#arrow"/></svg>' }],
+    ['#open-invitation', { vi: 'Mở thiệp báo hỷ <svg><use href="#arrow"/></svg>', en: 'Open celebration invitation <svg><use href="#arrow"/></svg>' }],
     ['.cover-note', { vi: 'Mở một lời mời, chung một niềm vui.', en: 'Open an invitation, share a joyful moment.' }],
     ['.site-header nav a:nth-child(1)', { vi: 'Hôn lễ', en: 'Ceremony' }],
     ['.site-header nav a:nth-child(2)', { vi: 'Tiệc cưới', en: 'Reception' }],
