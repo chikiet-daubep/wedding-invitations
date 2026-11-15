@@ -66,12 +66,16 @@ guests: {
 
 Gửi link dạng `https://ten-mien-cua-ban/?guest=anh-minh`. Alias `?to=anh-minh` cũng được hỗ trợ. Mã không có trong danh sách hiển thị `Quý khách`. Mã được chuyển thành chữ thường; nên dùng chữ không dấu và dấu gạch nối. Tên khách được chèn bằng `textContent`, không xử lý như HTML.
 
-Loại thiệp hiển thị ở bìa được cấu hình tại `invitationType` trong `public/config.js` (hiện tại là **Tiệc Báo Hỷ**):
+Mặc định thiệp hiển thị là **Thiệp mời thành hôn**. Muốn mở phiên bản **Tiệc Báo Hỷ**, thêm param `type=bao-hy` vào URL:
+
+`https://ten-mien-cua-ban/?guest=do-minh-hung&type=bao-hy`
+
+Các nội dung hai chế độ được cấu hình tại `invitationTypes` trong `public/config.js`:
 
 ```js
-invitationType: {
-  vi: 'TIỆC BÁO HỶ',
-  en: 'CELEBRATION RECEPTION',
+invitationTypes: {
+  wedding: { vi: 'THIỆP MỜI THÀNH HÔN', en: 'WEDDING INVITATION' },
+  baoHy: { vi: 'TIỆC BÁO HỶ', en: 'CELEBRATION RECEPTION' },
 },
 ```
 

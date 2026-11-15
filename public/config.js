@@ -6,9 +6,19 @@ window.WEDDING_CONFIG = {
   // GitHub Pages: điền URL Google Form để nhận RSVP, hoặc để trống.
   rsvpFormUrl: '',
   receptionAt: '2026-11-25T18:00:00+07:00',
-  invitationType: {
-    vi: 'TIỆC BÁO HỶ',
-    en: 'CELEBRATION RECEPTION',
+  invitationTypes: {
+    wedding: {
+      vi: 'THIỆP MỜI THÀNH HÔN',
+      en: 'WEDDING INVITATION',
+      openVi: 'Mở thiệp mời',
+      openEn: 'Open invitation',
+    },
+    baoHy: {
+      vi: 'TIỆC BÁO HỶ',
+      en: 'CELEBRATION RECEPTION',
+      openVi: 'Mở thiệp báo hỷ',
+      openEn: 'Open celebration invitation',
+    },
   },
   guests: {
     'gia-dinh': 'Quý gia đình',
